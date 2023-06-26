@@ -1,5 +1,9 @@
 package org.itstep.pizza;
 
+import lombok.Data;
+
+import javax.persistence.*;
+
 @Entity
 @Data
 @Table(name = "pizzas")
