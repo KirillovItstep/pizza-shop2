@@ -38,4 +38,37 @@ public class AppController {
         }
         else return "signin";
     }
+
+    @GetMapping("/signup")
+    public String signup(Model model) {
+        model.addAttribute("client", new ClientDao());
+        return "signup";
+    }
+
+    @PostMapping("/signup")
+    public String signup(ClientDao client, Model model){
+        //System.out.println(client);
+        model.addAttribute("client", new ClientDao());
+        if (client.getPassword().equals(client.getPassword2())){
+            Client newClient = new Client();
+            newClient.setName(client.getName());
+            newClient.setLogin(client.getLogin());
+            newClient.setAddress(client.getAddress());
+            newClient.setEmail(client.getEmail());
+            String prefix = "";
+            switch (client.getPrefix()){
+                case "0": prefix = "+375"; break;
+                case "1": prefix = "+972"; break;
+                case "2": prefix = "+198"; break;
+                case "3": prefix = "+701"; break;
+            }
+            newClient.setPhone(prefix + client.getPhone());
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
+            newClient.setPassword(encoder.encode(client.getPassword()));
+            clientService.save(newClient);
+        }
+        model.addAttribute("pizzas", pizzaService.findAll());
+        return "index";
+    }
+
 }

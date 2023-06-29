@@ -18,4 +18,8 @@ public class ClientService {
     public Client findByLogin(String login){
         return clientRepository.findByLogin(login).orElse(null);
     }
+
+    public Client save(Client client){
+        return clientRepository.save(client);
+    }
 }

@@ -8,6 +8,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClientDao {
+    private String name;
     private String login;
+    private String prefix;
+    private String phone;
+    private String email;
+    private String address;
     private String password;
+    private String password2;
 }
