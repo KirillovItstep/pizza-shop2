@@ -18,6 +18,7 @@ public class PizzaController {
 
     @GetMapping("/index")
     public String getPizzas(Model model) {
+        model.addAttribute("pizzas", pizzaService.findAll());
         return "index";
     }
 
