@@ -110,22 +110,22 @@
                 <th:block th:each="pizza:${pizzas}">
                 <div class="col-sm-6 col-xs-12 col-md-4 col-lg-3 delivery-menu__item delivery-menu__item--chikita" itemscope="" itemtype="http://schema.org/Product">
                     <a href="/delivery/item/296854">
-                        <p class="delivery-menu__title" itemprop="name">ПИЦЦА ФИЛАДЕЛЬФИЯ 30 см			<span class="delivery-menu__weight--hidden"> (440 г.)</span>
+                        <p class="delivery-menu__title" itemprop="name" th:text="${pizza.name}">
                         </p>
                     </a><div class="delivery__img--wrapper"><a href="/delivery/item/296854">
-                    <img class="delivery-menu__img" src="/img/catalog/preview_631863ef8ff9e.png" alt="ПИЦЦА ФИЛАДЕЛЬФИЯ 30 см" itemprop="image">
+                    <img class="delivery-menu__img" th:src="@{${'/img/catalog/'+pizza.image}}" th:alt="${pizza.name}" th:title="${pizza.name}" itemprop="image">
 
                 </a>
-                    <p class="delivery-menu__weight" itemprop="weight">440 г.</p>
+                    <p class="delivery-menu__weight" itemprop="weight" th:text="${pizza.mass} +' г.'"></p>
                     <div class="delivery-menu__icon">
                         <span class="new"></span>			<p class="delivery-menu__icon-text delivery-menu__icon-text--violet">NEW</p>
                     </div>
                 </div>
                     <div class="delivery-menu__text-wrapper">
-                        <p class="delivery-menu__text" itemprop="description">Основа для пиццы, итальянский соус, сыр, форель слабосоленая, творожный сыр, кунжут, руккола</p>
+                        <p class="delivery-menu__text" itemprop="description" th:text="${pizza.desc}"></p>
                     </div>
                     <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
-                        <p itemprop="price" content="26.50" class="delivery-menu__price">26.50 р.</p>
+                        <p itemprop="price" content="26.50" class="delivery-menu__price" th:text="${#numbers.formatDecimal(pizza.price/100,0,2,'POINT') + ' р.'}"></p>
                     </div>
                     <a href="/delivery/item/296854" class="delivery-menu__button delivery-menu__button--disabled">ПОДРОБНЕЕ</a></div>
                 </th:block>
