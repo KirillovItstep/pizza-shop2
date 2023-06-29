@@ -14,4 +14,8 @@ public class ClientService {
     public List<Client> findAll(){
         return clientRepository.findAll();
     }
+
+    public Client findByLogin(String login){
+        return clientRepository.findByLogin(login).orElse(null);
+    }
 }
