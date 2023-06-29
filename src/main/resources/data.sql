@@ -14,3 +14,10 @@ insert into pizzas (NAME, IMAGE, MASS, DESC, PRICE) values
 ('ПИЦЦА ГРУША ДОРБЛЮ 30СМ', 'preview_6414081a49644.png', 420, 'Мягкий сливочный сыр, моцарелла, сыр Дор Блю, груша, вяленый томат, руккола, медово-лимонная заправка', 1820);
 insert into pizzas (NAME, IMAGE, MASS, DESC, PRICE) values
 ('ШЕФ-ПИЦЦА ЯКУШЕВА ПОЛУОСТРАЯ 30 СМ', 'preview_5cc6af1b7176e.png', 480, 'Копчёная грудинка, куриное маринованное филе, репчатый лук, твёрдый сыр, томатный соус, медовый соус, кунжут, острый консервированный перец, основа для пиццы', 1790);
+
+insert into clients (NAME, login, phone, email, address, password) values
+('user', 'user', 'user@gmail.com', '+37529-1234567', 'Vitebsk, Pobedy st., 21', '$2a$10$30k9Zm7t7ICejWH.akT4auhQiLOKT2Iw344.AfO8Fd8mphj8c/5wi');
+insert into clients (NAME, login, phone, email, address, password) values
+('guest', 'guest', 'guest@gmail.com', '+37529-1234568', 'Vitebsk, Moskowsky st., 21', '$2a$10$jfWCmy/N8JNr8gObRh8VqegWghteTI/aKM2NKJIBW.H3xvTY9Tf5K');
+insert into clients (NAME, login, phone, email, address, password) values
+('root', 'root', 'root@gmail.com', '+37529-1234569', 'Vitebsk, Moskowsky st., 22', '$2a$10$6pe0GX6McE5ST.WIS3OnyuC7y4a37r9Er8Jq7vfuqt25GKjmISt0S');
