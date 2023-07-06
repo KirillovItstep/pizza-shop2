@@ -24,7 +24,7 @@ public class OrderDetails {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
-    //@JsonIgnore //Иначе не выведет в браузер JSON по причине рекурсии
+    @JsonIgnore //Иначе не выведет в браузер JSON по причине рекурсии
     private Order order;
 
     @Override

@@ -135,6 +135,7 @@
         </div>
     </div>
 </div>
+
     <div class="cart-min" style="opacity: 1; display: block;">
         <i class="icon-basket icon-basket-2"></i>
         <div class="cart-min__amount cart__amount--num" id="cartAmountNum">1</div>
@@ -158,13 +159,14 @@
         </div>
             <div class="cart__nth-row-wrapper">
                 <div class="cart__nth-row row-clear">
+                    <th:block th:each="order:${orders}">
                     <div class="cart__item">
                         <div class="cart__img--wrapper">
-                            <img class="cart__img" src="/img/catalog//5c0e5118c3bd3.png" alt="МЕГА-ПИЦЦА ПРОВАНС 40см">
+                            <img class="cart__img" src="/img/catalog//5c0e5118c3bd3.png">
                         </div>
                         <div class="cart__item--wrapper">
                             <div class="cart__item--name-wrapper">
-                                <p class="cart__item--name">МЕГА-ПИЦЦА ПРОВАНС 40см</p>
+                                <p class="cart__item--name" th:text="${order.orderDetails.pizza.name}"></p>
                             </div>
                             <p class="cart__item--price">
                                 <a class="cart__signs min" href="javascript:;" onclick="dominus('583499')">
@@ -179,6 +181,7 @@
                         </div>
                         <a class="cart__item--delete" onclick="delete_from_cart('583499'); return false;" href="javascript:;"><i class="icon-cancel-circled"></i></a>
                     </div>
+                    </th:block>
                 </div>
             </div>
             <div class="cart__result row-clear">
@@ -241,6 +244,27 @@
             });
     }
 
+    $('.cart-min').click(
+        function(){
+            $('.cart').show()
+        });
+    $('.cart__hide-word').click(function(){
+        $('.cart').hide()
+    });
+
+    function doplus(id) {
+        $('#rowid' + id).html(parseInt($('#rowid' + id).html()) + 1);
+        //contUpt('#cartcontainer', '/ajax/cart_update/' + id + '/' + parseInt($('#rowid' + id).html()));
+    }
+    ;
+
+    function dominus(id) {
+        if (parseInt($('#rowid' + id).html()) > 0) {
+            $('#rowid' + id).html(parseInt($('#rowid' + id).html()) - 1);
+            //contUpt('#cartcontainer', '/ajax/cart_update/' + id + '/' + parseInt($('#rowid' + id).html()));
+        }
+    }
+    ;
 </script>
 </body>
 </html>

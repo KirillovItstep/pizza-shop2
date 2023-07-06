@@ -18,4 +18,8 @@ public class OrderService {
     public Order save(Order order){
         return orderRepository.save(order);
     }
+
+    public List<Order> findByClientAndStatus(Client client, String status){
+        return orderRepository.findByClientAndStatus(client, status);
+    }
 }

@@ -3,6 +3,8 @@ package org.itstep.controller;
 import org.itstep.client.Client;
 import org.itstep.client.ClientDao;
 import org.itstep.client.ClientService;
+import org.itstep.order.Order;
+import org.itstep.order.OrderService;
 import org.itstep.pizza.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -12,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class AppController {
 
@@ -20,6 +24,9 @@ public class AppController {
 
     @Autowired
     private PizzaService pizzaService;
+
+    @Autowired
+    private OrderService orderService;
 
     @Autowired
     private ApplicationContext context;
@@ -42,6 +49,8 @@ public class AppController {
             //System.out.println(currClient);
             model.addAttribute("pizzas", pizzaService.findAll());
             model.addAttribute("client", context.getBean(Client.class));
+            List<Order> orders = orderService.findByClientAndStatus(clientService.findById(currClient.getId()), "n");
+            model.addAttribute("orders", orders);
             return "index";
         }
         else return "signin";
