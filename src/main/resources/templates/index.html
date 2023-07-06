@@ -134,6 +134,94 @@
         </div>
     </div>
 </div>
+    <div class="cart-min" style="opacity: 1; display: block;">
+        <i class="icon-basket icon-basket-2"></i>
+        <div class="cart-min__amount cart__amount--num" id="cartAmountNum">1</div>
+    </div>
+    <div class="cart" style="top: 284.5px; display: block;">
+        <div id="cartcontainer"><div class="cart__first-row row-clear">
+            <p class="cart__name">
+                <span class="cart__icon-wrapper"><i class="icon-basket icon-basket-2"></i></span>
+                <span class="cart__name--hidden-mobile">Корзина</span>
+            </p>
+            <p class="cart__amount">
+                <span class="cart__amount-text--hidden-desktop">В корзине</span>
+                <span class="cart__amount--num">1</span>
+                <span class="cart__amount--word">товар</span>
+            </p>
+            <div class="cart__mobile-only"></div>
+            <div class="cart__logo">
+                <img class="cart__logo-img" src="/views/img/logo.png" alt="logo" itemprop="logo">
+            </div>
+        </div>
+            <div class="cart__nth-row-wrapper">
+                <div class="cart__nth-row row-clear">
+                    <div class="cart__item">
+                        <div class="cart__img--wrapper">
+                            <img class="cart__img" src="/img/catalog//5c0e5118c3bd3.png" alt="МЕГА-ПИЦЦА ПРОВАНС 40см">
+                        </div>
+                        <div class="cart__item--wrapper">
+                            <div class="cart__item--name-wrapper">
+                                <p class="cart__item--name">МЕГА-ПИЦЦА ПРОВАНС 40см</p>
+                            </div>
+                            <p class="cart__item--price">
+                                <a class="cart__signs min" href="javascript:;" onclick="dominus('583499')">
+                                    <i class="icon-minus-circle"></i>
+                                </a>
+                                <span class="cart__num-of-dishes count" id="rowid583499">1</span>
+                                <a class="cart__signs plus" href="javascript:;" onclick="doplus('583499')">
+                                    <i class="icon-plus-circle"></i>
+                                </a>
+                                <i class="icon-cancel"></i>
+                                <span class="price">32.10</span> руб.</p>
+                        </div>
+                        <a class="cart__item--delete" onclick="delete_from_cart('583499'); return false;" href="javascript:;"><i class="icon-cancel-circled"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="cart__result row-clear">
+                <p class="cart__result--text">Ваш заказ:</p>
+                <p class="cart__result--sum" id="result">32.10 руб.</p>
+            </div>
+        </div>
+        <form method="post" action="/site/order" class="material">
+            <input type="hidden" name="_csrf" value="CnYhLROMgOpVkDsSrjiRFp7N1HrIcSzt-XNMhLD6fM98Q0x9YdTsrS-mSiSfecBu5qnlMr0WYaWzKX7d_cMjgw==">
+            <div class="material-input input"><input type="text" name="name" data-required="" required="" id="name"><span class="material-bar"></span><label for="name">Имя</label></div>
+            <div class="material-input input"><input type="text" name="phone" id="phone" data-required="" required=""><span class="material-bar"></span><label for="phone">Телефон</label></div>
+            <div class="material-input input"><input type="text" name="address" data-required="" required="" id="address"><span class="material-bar"></span><label for="address">Адрес</label></div>
+
+            <input type="hidden" name="time_from">
+            <input type="hidden" name="time_to">
+            <div class="material-input textarea"><textarea name="notes" id="notes"></textarea><span class="material-bar"></span><label for="notes">Время доставки и особые пожелания</label></div>
+
+            <input class="submit-btn" type="submit" value="Оформить заказ">
+            <input class="payment-type" type="hidden" id="ptype" value="1" name="payment">
+            <div class="payment-notice" style="">
+                Оформляя заказ, Вы даете согласие на обработку данных, в соответствии с <a href="/pages/view/terms">пользовательским соглашением</a>
+            </div>
+
+            <div class="row" style="margin-right: 0">
+                <div class="col-xs-12">
+                    <div class="btn-group btn-group-justified" role="group" aria-label="">
+                        <div class="btn-group" role="group">
+                            <input class="payment-type" type="hidden" value="1" name="">
+                            <button type="button" class="btn btn-paymenttype btn-default btn-active">Оплата курьеру</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <input class="payment-type" type="hidden" value="2" name="">
+                            <button type="button" class="btn btn-paymenttype btn-default ">Оплата картой</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <p class="cart__result-notification" style="padding: 6px 0">Оплата банковской картой производится день в день до 22.00</p>
+                </div>
+            </div>
+        </form>
+        <div class="cart__hide">
+            <a id="hide"><i class="icon-cancel icon-cancel--hide"></i><span class="cart__hide-word">свернуть</span></a>
+        </div>
+    </div>
 <script th:inline="javascript">
     var client_id=[[${client.id}]];
     //console.log(client_id);
