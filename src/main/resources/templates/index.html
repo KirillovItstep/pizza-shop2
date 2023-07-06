@@ -127,12 +127,17 @@
                     <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
                         <p itemprop="price" content="26.50" class="delivery-menu__price" th:text="${#numbers.formatDecimal(pizza.price/100,0,2,'POINT') + ' р.'}"></p>
                     </div>
-                    <a href="/delivery/item/296854" class="delivery-menu__button delivery-menu__button--disabled">ПОДРОБНЕЕ</a></div>
+                    <a th:onclick="|addToCart(${pizza.id})|" class="delivery-menu__button delivery-menu__button--disabled">Заказать</a></div>
                 </th:block>
                 <div class="clear"></div>
             </div>
         </div>
     </div>
 </div>
+<script th:inline="javascript">
+    var client_id=[[${client.id}]];
+    //console.log(client_id);
+
+</script>
 </body>
 </html>

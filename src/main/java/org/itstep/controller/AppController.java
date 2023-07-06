@@ -5,6 +5,7 @@ import org.itstep.client.ClientDao;
 import org.itstep.client.ClientService;
 import org.itstep.pizza.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,9 @@ public class AppController {
     @Autowired
     private PizzaService pizzaService;
 
+    @Autowired
+    private ApplicationContext context;
+
     @GetMapping("/signin")
     public String signin(Model model) {
         model.addAttribute("client", new Client());
@@ -33,7 +37,11 @@ public class AppController {
         Client clientDb = clientService.findByLogin(client.getLogin()); //Есть ли пользователь в бд
         if (clientDb==null) return "signin";
         if (encoder.matches(client.getPassword(), clientDb.getPassword())){
+            Client currClient = context.getBean(Client.class);
+            currClient.setId(clientDb.getId());
+            //System.out.println(currClient);
             model.addAttribute("pizzas", pizzaService.findAll());
+            model.addAttribute("client", context.getBean(Client.class));
             return "index";
         }
         else return "signin";
@@ -68,6 +76,7 @@ public class AppController {
             clientService.save(newClient);
         }
         model.addAttribute("pizzas", pizzaService.findAll());
+        model.addAttribute("client", context.getBean(Client.class));
         return "index";
     }
 
