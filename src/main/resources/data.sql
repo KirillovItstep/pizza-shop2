@@ -21,3 +21,9 @@ insert into clients (NAME, login, phone, email, address, password) values
 ('guest', 'guest', 'guest@gmail.com', '+37529-1234568', 'Vitebsk, Moskowsky st., 21', '$2a$10$jfWCmy/N8JNr8gObRh8VqegWghteTI/aKM2NKJIBW.H3xvTY9Tf5K');
 insert into clients (NAME, login, phone, email, address, password) values
 ('root', 'root', 'root@gmail.com', '+37529-1234569', 'Vitebsk, Moskowsky st., 22', '$2a$10$6pe0GX6McE5ST.WIS3OnyuC7y4a37r9Er8Jq7vfuqt25GKjmISt0S');
+
+insert into orders (date, status, client_id) values ('2023-05-05T11:50:55', 'A', 1);
+insert into orders (date, status, client_id) values ('2023-05-05T11:50:55', 'A', 2);
+
+insert into order_details (order_id, pizza_id, count) values (1, 1, 1);
+insert into order_details (order_id, pizza_id, count) values (1, 2, 2);

@@ -138,6 +138,19 @@
     var client_id=[[${client.id}]];
     //console.log(client_id);
 
+    async function addToCart(pizza_id){
+        //console.log(id);
+        var client_id = [[${client.id}]];
+        console.log(client_id);
+        var count = 1;
+        const res = await fetch(`http://localhost:8080/order`,
+            {
+                method: "POST",
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({client_id, pizza_id, count})
+            });
+    }
+
 </script>
 </body>
 </html>

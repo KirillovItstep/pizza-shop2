@@ -1,5 +1,6 @@
 package org.itstep.pizza;
 
+import org.itstep.client.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,5 +17,9 @@ public class PizzaService {
 
     public List<Pizza> findAll(){
         return pizzaRepository.findAll();
+    }
+
+    public Pizza findById(Long id){
+        return pizzaRepository.findById(id).orElse(null);
     }
 }

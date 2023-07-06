@@ -15,4 +15,7 @@ public class OrderDetailsService {
         return orderDetailsRepository.findAll();
     }
 
+    public OrderDetails save(OrderDetails orderDetails){
+        return orderDetailsRepository.save(orderDetails);
+    }
 }
