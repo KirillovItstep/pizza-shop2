@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="nav" id="nav">
@@ -138,7 +139,8 @@
         <i class="icon-basket icon-basket-2"></i>
         <div class="cart-min__amount cart__amount--num" id="cartAmountNum">1</div>
     </div>
-    <div class="cart" style="top: 284.5px; display: block;">
+
+    <div class="cart" style="top: 284.5px; display: none;">
         <div id="cartcontainer"><div class="cart__first-row row-clear">
             <p class="cart__name">
                 <span class="cart__icon-wrapper"><i class="icon-basket icon-basket-2"></i></span>
