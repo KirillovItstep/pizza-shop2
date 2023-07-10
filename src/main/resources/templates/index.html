@@ -9,6 +9,7 @@
     <title>Document</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
     <nav class="nav" id="nav">
@@ -126,7 +127,7 @@
                         <p class="delivery-menu__text" itemprop="description" th:text="${pizza.desc}"></p>
                     </div>
                     <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
-                        <p itemprop="price" content="26.50" class="delivery-menu__price" th:text="${#numbers.formatDecimal(pizza.price/100,0,2,'POINT') + ' р.'}"></p>
+                        <p itemprop="price" content="26.50" class="delivery-menu__price" th:text="${#numbers.formatDecimal(1.0*pizza.price/100,0,2,'POINT') + ' р.'}"></p>
                     </div>
                     <a th:onclick="|addToCart(${pizza.id})|" class="delivery-menu__button delivery-menu__button--disabled">Заказать</a></div>
                 </th:block>
@@ -137,19 +138,19 @@
 </div>
 
     <div class="cart-min" style="opacity: 1; display: block;">
-        <i class="icon-basket icon-basket-2"></i>
-        <div class="cart-min__amount cart__amount--num" id="cartAmountNum">1</div>
+        <i class='bx bxs-basket'></i>
+        <div class="cart-min__amount cart__amount--num" id="cartAmountNum" th:utext="${#lists.size(orders)}"></div>
     </div>
 
     <div class="cart" style="top: 284.5px; display: none;">
         <div id="cartcontainer"><div class="cart__first-row row-clear">
             <p class="cart__name">
-                <span class="cart__icon-wrapper"><i class="icon-basket icon-basket-2"></i></span>
+                <span class="cart__icon-wrapper"><i class='bx bxs-basket'></i></span>
                 <span class="cart__name--hidden-mobile">Корзина</span>
             </p>
             <p class="cart__amount">
                 <span class="cart__amount-text--hidden-desktop">В корзине</span>
-                <span class="cart__amount--num">1</span>
+                <span class="cart__amount--num" th:utext="${#lists.size(orders)}"></span>
                 <span class="cart__amount--word">товар</span>
             </p>
             <div class="cart__mobile-only"></div>
@@ -162,31 +163,31 @@
                     <th:block th:each="order:${orders}">
                     <div class="cart__item">
                         <div class="cart__img--wrapper">
-                            <img class="cart__img" src="/img/catalog//5c0e5118c3bd3.png">
+                            <img class="cart__img" th:src="@{${'/img/catalog/' + order.orderDetails.pizza.image}}">
                         </div>
                         <div class="cart__item--wrapper">
                             <div class="cart__item--name-wrapper">
                                 <p class="cart__item--name" th:text="${order.orderDetails.pizza.name}"></p>
                             </div>
                             <p class="cart__item--price">
-                                <a class="cart__signs min" href="javascript:;" onclick="dominus('583499')">
-                                    <i class="icon-minus-circle"></i>
+                                <a class="cart__signs min" href="javascript:;" th:onclick="|dominus(${order.orderDetails.pizza.id})|">
+                                    <i class='bx bxs-minus-circle'></i>
                                 </a>
-                                <span class="cart__num-of-dishes count" id="rowid583499">1</span>
-                                <a class="cart__signs plus" href="javascript:;" onclick="doplus('583499')">
-                                    <i class="icon-plus-circle"></i>
+                                <span class="cart__num-of-dishes count" th:id="${order.orderDetails.pizza.id}" th:utext="${order.orderDetails.count}"></span>
+                                <a class="cart__signs plus" href="javascript:;" th:onclick="|doplus(${order.orderDetails.pizza.id})|">
+                                    <i class='bx bxs-plus-circle'></i>
                                 </a>
-                                <i class="icon-cancel"></i>
-                                <span class="price">32.10</span> руб.</p>
+                                <i class='bx bx-window-close' ></i>
+                                <span class="price" th:text="${#numbers.formatDecimal(1.0*order.orderDetails.pizza.price/100, 0, 2, 'POINT')}"></span> руб.</p>
                         </div>
-                        <a class="cart__item--delete" onclick="delete_from_cart('583499'); return false;" href="javascript:;"><i class="icon-cancel-circled"></i></a>
+                        <a class="cart__item--delete" onclick="delete_from_cart('583499'); return false;" href="javascript:;"><i class='bx bx-window-close' ></i> </a>
                     </div>
                     </th:block>
                 </div>
             </div>
             <div class="cart__result row-clear">
                 <p class="cart__result--text">Ваш заказ:</p>
-                <p class="cart__result--sum" id="result">32.10 руб.</p>
+                <p class="cart__result--sum" id="result"></p>
             </div>
         </div>
         <form method="post" action="/site/order" class="material">
@@ -253,18 +254,29 @@
     });
 
     function doplus(id) {
-        $('#rowid' + id).html(parseInt($('#rowid' + id).html()) + 1);
+        $('#' + id).html(parseInt($('#' + id).html()) + 1);
+        calcResult();
         //contUpt('#cartcontainer', '/ajax/cart_update/' + id + '/' + parseInt($('#rowid' + id).html()));
     }
-    ;
 
     function dominus(id) {
-        if (parseInt($('#rowid' + id).html()) > 0) {
-            $('#rowid' + id).html(parseInt($('#rowid' + id).html()) - 1);
+        if (parseInt($('#' + id).html()) > 0) {
+            $('#' + id).html(parseInt($('#' + id).html()) - 1);
+            calcResult();
             //contUpt('#cartcontainer', '/ajax/cart_update/' + id + '/' + parseInt($('#rowid' + id).html()));
         }
     }
-    ;
+
+    function calcResult(){
+        let result = 0;
+        let orders = [[${orders}]];
+        orders.forEach(order => {
+            let count = parseInt($('#' + order.orderDetails.pizza.id).html());
+            result+=order.orderDetails.pizza.price*count});
+        $("#result").html((1.0*result/100).toFixed(2)+" руб.");
+    }
+
+    calcResult();
 </script>
 </body>
 </html>
